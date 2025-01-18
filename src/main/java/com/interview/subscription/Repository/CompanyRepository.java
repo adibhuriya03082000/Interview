@@ -4,7 +4,10 @@ import com.interview.subscription.Entity.Company;
 
 public interface CompanyRepository {
 
-    public void saveCompany(Company company);
-    public Company findByKey(String key);
+    public void createCompany(Company company);
+
+    public Company findByNameAndEmail(String name, String email);
+
+    
     
 }

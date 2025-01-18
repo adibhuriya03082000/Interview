@@ -4,13 +4,17 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     
     @Id

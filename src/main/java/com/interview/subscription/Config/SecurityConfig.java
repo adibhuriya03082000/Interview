@@ -12,21 +12,24 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.interview.subscription.Security.JwtAuthenticationFilter;
 
+import lombok.AllArgsConstructor;
+
 @Configuration
+@AllArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/subscription/createUser").permitAll()
-                        .anyRequest().authenticated()
+                    .requestMatchers("/api/user/createUser").permitAll()
+                    .requestMatchers("/api/user/login").permitAll()
+                    .requestMatchers("/api/company/decode").hasAuthority("Admin")
+                    .requestMatchers("/api/users/admin").hasAuthority("Admin")
+                    .requestMatchers("/api/users/user").hasAuthority("User")
+                    .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

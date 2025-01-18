@@ -6,5 +6,7 @@ public interface UserRepository {
     
     public User findByUsername(String username);
 
-    public User save(User user);
+    public User createUser(User user);
+
+    public void saveLoginDetails(String username);
 }
